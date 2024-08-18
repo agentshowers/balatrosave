@@ -10,8 +10,6 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
         const reader = new FileReader()
         reader.onload = handleFileLoad;
         reader.readAsArrayBuffer(file);
-    } else {
-        document.getElementById('fileDetails').innerHTML = 'No file selected.';
     }
 });
 
