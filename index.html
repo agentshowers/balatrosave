@@ -3,21 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
     <title>Balatro save</title>
 </head>
 <body>
-    Mac location: ~/Library/Application Support/Balatro/1/profile.jkr
-    <form id="uploadForm">
-        <input type="file" id="fileInput" />
-        <button type="submit">Upload</button>
-    </form>
-    <p id="overall"></p>
-    <p>Most gold stakes wins:</p>
-    <p id="wins"></p>
-    <p>Most gold stakes losses:</p>
-    <p id="losses"></p>
-    <p>Missing jokers:</p>
-    <p id="missing"></p>
+    <header>
+        <h1>Balatro Completionist++ Tracker</h1>
+    </header>
+    <main>
+        <details>
+            <summary>Gold Stake <span id="stake_8_count"></span></summary>
+            <p id="stake_8"></p>
+        </details>
+        <details>
+            <summary>Orange Stake <span id="stake_7_count"></span></summary>
+            <p id="stake_7"></p>
+        </details>
+        <details>
+            <summary>Purple Stake <span id="stake_6_count"></span></summary>
+            <p id="stake_6"></p>
+        </details>
+        <details>
+            <summary>Blue Stake <span id="stake_5_count"></span></summary>
+            <p id="stake_5"></p>
+        </details>
+        <details>
+            <summary>Black Stake <span id="stake_4_count"></span></summary>
+            <p id="stake_4"></p>
+        </details>
+        <details>
+            <summary>Green Stake <span id="stake_3_count"></span></summary>
+            <p id="stake_3"></p>
+        </details>
+        <details>
+            <summary>Red Stake <span id="stake_2_count"></span></summary>
+            <p id="stake_2"></p>
+        </details>
+        <details>
+            <summary>White Stake <span id="stake_1_count"></span></summary>
+            <p id="stake_1"></p>
+        </details>
+        <details>
+            <summary>No wins <span id="stake_0_count"></span></summary>
+            <p id="stake_0"></p>
+        </details>
+    
+        <div class="notice">
+            <form id="uploadForm">
+                <input type="file" id="fileInput" />
+                <button type="submit">Upload</button>
+            </form>
+            <p>Mac location: ~/Library/Application Support/Balatro/1/profile.jkr</p>
+        </div>
+    </main>
+   
     
     <script src="pako.js"></script>
     <script src="script.js"></script>

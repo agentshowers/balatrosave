@@ -1,3 +1,5 @@
+const STAKES = 8;
+
 document.getElementById('uploadForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from submitting in the traditional way
 
@@ -16,35 +18,21 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
 function handleFileLoad(event) {
     let text = pako.inflate(event.target.result, { windowBits: -15, to: "string"});
     let json = JSON.parse(cleanText(text));
-    let allJokers = []
-    let winners = {};
-    let losers = {};
+    let stakes = Array.from(Array(STAKES + 1), () => []);
     for (const joker in json.joker_usage) {
-        allJokers.push(joker);
-        let wins = json.joker_usage[joker].wins;
-        let losses = json.joker_usage[joker].losses;
-        if (wins['8']) {
-            winners[joker] = wins['8'];
+        let wins = Object.keys(json.joker_usage[joker].wins);
+        let maxWin = 0;
+        if (wins.length > 0) {
+            maxWin = Number(wins.sort()[wins.length - 1]);
         }
-        if (losses['8']) {
-            losers[joker] = losses['8'];
-        }
+        stakes[maxWin].push(joker);
     }
 
-    let overallHtml = `Gold stickers: ${Object.keys(winners).length} / ${allJokers.length}<br>`
-    document.getElementById('overall').innerHTML = overallHtml;
-
-    let sortedWins = Object.entries(winners).sort(([,a],[,b]) => b-a);
-    let winnersHtml = sortedWins.slice(0, 5).map(x => `${x[0]} (${x[1]})`).join('<br>');
-    document.getElementById('wins').innerHTML = winnersHtml;
-
-    let sortedLosses = Object.entries(losers).sort(([,a],[,b]) => b-a);
-    let losersHtml = sortedLosses.slice(0, 5).map(x => `${x[0]} (${x[1]})`).join('<br>');
-    document.getElementById('losses').innerHTML = losersHtml;
-
-    let nonWinners = allJokers.filter(x => !Object.keys(winners).includes(x));
-    let missingHtml = nonWinners.join('<br>');
-    document.getElementById('missing').innerHTML = missingHtml;
+    for (let i = 0; i <= STAKES; i++) {
+        let html = stakes[i].join("<br>");
+        document.getElementById(`stake_${i}`).innerHTML = html;
+        document.getElementById(`stake_${i}_count`).innerHTML = `(${stakes[i].length})`;
+    } 
 
 }
 
