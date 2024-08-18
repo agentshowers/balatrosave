@@ -19,4 +19,4 @@ def parse(str)
   str
 end
 
-puts parse(decompress(ARGV[0]))
+File.write("out/#{ARGV[0]}.json", parse(decompress("saves/#{ARGV[0]}.jkr")))
