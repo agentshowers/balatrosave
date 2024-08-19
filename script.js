@@ -1,42 +1,61 @@
-const STAKES = 8;
+const STAKES = ["No wins", "White stake", "Red stake", "Green stake", "Black stake", "Blue stake", "Purple stake", "Orange stake", "Gold stake"]
 
-document.getElementById('uploadForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting in the traditional way
+function convertFile(compressedFile) {
+  let text = pako.inflate(compressedFile, { windowBits: -15, to: "string" });
+  text = text.replace(/\["?([\w\s]+)"?\]=/g, "\"$1\": ");
+  text = text.replace(/,}/g, "}");
+  text = text.replace("return ", "");
+  return JSON.parse(text);
+}
 
-    const fileInput = document.getElementById('fileInput');
-    const file = fileInput.files[0];
-
-    if (file) {
-        const reader = new FileReader()
-        reader.onload = handleFileLoad;
-        reader.readAsArrayBuffer(file);
+const App = {
+  data() {
+    return {
+      loaded: false,
+      error: "",
     }
-});
+  },
 
-function handleFileLoad(event) {
-    let text = pako.inflate(event.target.result, { windowBits: -15, to: "string"});
-    let json = JSON.parse(cleanText(text));
-    let stakes = Array.from(Array(STAKES + 1), () => []);
-    for (const joker in json.joker_usage) {
-        let wins = Object.keys(json.joker_usage[joker].wins);
-        let maxWin = 0;
-        if (wins.length > 0) {
-            maxWin = Number(wins.sort()[wins.length - 1]);
+  created() {
+    this.reset();
+  },
+
+  methods: {
+    loadFile(event) {
+      let file = event.target.files[0];
+      let reader = new FileReader();
+      reader.onload = this.parseFile;
+      reader.readAsArrayBuffer(file);
+    },
+
+    parseFile(event) {
+      this.reset();
+      try {
+        let data = convertFile(event.target.result);
+        if (!data.joker_usage) {
+          throw new Error('Wrong .jkr file');
         }
-        stakes[maxWin].push(joker);
-    }
+        for (const joker in data.joker_usage) {
+          let wins = Object.keys(data.joker_usage[joker].wins);
+          let maxWin = 0;
+          if (wins.length > 0) {
+            maxWin = Number(wins.sort()[wins.length - 1]);
+          }
+          this.stakes[maxWin].jokers.push(joker);
+        }
+        this.loaded = true;
+      } catch (error) {
+        console.log(error);
+        this.error = "Couldn't load profile. Make sure you've selected the profile.jkr file."
+      }
+    },
 
-    for (let i = 0; i <= STAKES; i++) {
-        let html = stakes[i].join("<br>");
-        document.getElementById(`stake_${i}`).innerHTML = html;
-        document.getElementById(`stake_${i}_count`).innerHTML = `(${stakes[i].length})`;
-    } 
-
+    reset() {
+      this.stakes = STAKES.map(stake => { return { name: stake, jokers: [] } });
+      this.loaded = false;
+      this.error = "";
+    },
+  }
 }
 
-function cleanText(text) {
-    text = text.replace(/\["?([\w\s]+)"?\]=/g, "\"$1\": ");
-    text = text.replace(/,}/g,"}");
-    text = text.replace("return ", "");
-    return text;
-}
+Vue.createApp(App).mount("#app")

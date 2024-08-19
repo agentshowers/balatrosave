@@ -1,64 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
     <title>Balatro Completionist++ Tracker</title>
 </head>
+
 <body>
     <header>
         <h1>Balatro Completionist++ Tracker</h1>
     </header>
-    <main>
-        <details>
-            <summary>Gold Stake <span id="stake_8_count"></span></summary>
-            <p id="stake_8"></p>
-        </details>
-        <details>
-            <summary>Orange Stake <span id="stake_7_count"></span></summary>
-            <p id="stake_7"></p>
-        </details>
-        <details>
-            <summary>Purple Stake <span id="stake_6_count"></span></summary>
-            <p id="stake_6"></p>
-        </details>
-        <details>
-            <summary>Blue Stake <span id="stake_5_count"></span></summary>
-            <p id="stake_5"></p>
-        </details>
-        <details>
-            <summary>Black Stake <span id="stake_4_count"></span></summary>
-            <p id="stake_4"></p>
-        </details>
-        <details>
-            <summary>Green Stake <span id="stake_3_count"></span></summary>
-            <p id="stake_3"></p>
-        </details>
-        <details>
-            <summary>Red Stake <span id="stake_2_count"></span></summary>
-            <p id="stake_2"></p>
-        </details>
-        <details>
-            <summary>White Stake <span id="stake_1_count"></span></summary>
-            <p id="stake_1"></p>
-        </details>
-        <details>
-            <summary>No wins <span id="stake_0_count"></span></summary>
-            <p id="stake_0"></p>
-        </details>
-    
+    <main id="app">
+        <div v-if="loaded">
+            <details v-for="stake in stakes.reverse()">
+                <summary>{{stake.name}} ({{stake.jokers.length}})</summary>
+                <p v-for="joker in stake.jokers">{{joker}}</p>
+            </details>
+        </div>
+
         <div class="notice">
-            <form id="uploadForm">
-                <input type="file" id="fileInput" />
-                <button type="submit">Upload</button>
-            </form>
-            <p>Mac location: ~/Library/Application Support/Balatro/1/profile.jkr</p>
+            <h4 style="margin-top: 0">Select your save file</h4>
+            <input type="file" @change="loadFile">
+            <p v-if="error" style="color: red">{{error}}</p>
+            <p>
+                <b>Mac</b>: ~/Library/Application Support/Balatro/1/profile.jkr<br>
+                <b>Windows</b>: %appdata%/Balatro/1/profile.jkr
+            </p>
         </div>
     </main>
-   
-    
+
+
     <script src="pako.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
