@@ -13,6 +13,7 @@ const App = {
     return {
       loaded: false,
       error: "",
+      jokers: JOKERS,
     }
   },
 

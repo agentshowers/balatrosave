@@ -1,0 +1,10 @@
+.joker {
+  width: 71px;
+  height: 95px;
+  background-image: url(images/Jokers.png);
+}
+
+.jokerContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
