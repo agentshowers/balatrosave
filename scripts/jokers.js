@@ -487,7 +487,8 @@ JOKERS = {
     "pos": {
       "x": 4,
       "y": 12
-    }
+    },
+    "image": "Hologram.webp"
   },
   "j_vagabond": {
     "name": "Vagabond",
@@ -1015,38 +1016,43 @@ JOKERS = {
     }
   },
   "j_caino": {
-    "name": "Caino",
+    "name": "Canio",
     "pos": {
       "x": 3,
       "y": 8
-    }
+    },
+    "image": "Canio.webp"
   },
   "j_triboulet": {
     "name": "Triboulet",
     "pos": {
       "x": 4,
       "y": 8
-    }
+    },
+    "image": "Triboulet.webp"
   },
   "j_yorick": {
     "name": "Yorick",
     "pos": {
       "x": 5,
       "y": 8
-    }
+    },
+    "image": "Yorick.webp"
   },
   "j_chicot": {
     "name": "Chicot",
     "pos": {
       "x": 6,
       "y": 8
-    }
+    },
+    "image": "Chicot.webp"
   },
   "j_perkeo": {
     "name": "Perkeo",
     "pos": {
       "x": 7,
       "y": 8
-    }
+    },
+    "image": "Perkeo.webp"
   }
 }

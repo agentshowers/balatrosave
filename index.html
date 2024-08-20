@@ -19,8 +19,7 @@
             <details v-for="stake in stakes.reverse()">
                 <summary>{{stake.name}} ({{stake.jokers.length}})</summary>
                 <div class="jokerContainer">
-                    <span v-for="joker in stake.jokers" class="joker"
-                        :style="{'background-position': (-71 * jokers[joker].pos.x) + 'px ' + (-95 * jokers[joker].pos.y) + 'px ' }"></span>
+                    <span v-for="joker in stake.jokers" class="joker" :style="jokerStyle(joker)"></span>
                 </div>
             </details>
         </div>
