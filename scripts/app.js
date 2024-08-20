@@ -51,14 +51,11 @@ const App = {
     },
 
     jokerStyle(joker) {
-      let style;
       if ('image' in JOKERS[joker]) {
-        style = `background-image: url(images/${JOKERS[joker].image}); background-size: 71px;`;
+        return `background-image: url(images/${JOKERS[joker].image}); background-size: 71px;`;
       } else {
-        style = `background-position: ${-71 * JOKERS[joker].pos.x}px ${-95 * JOKERS[joker].pos.y}px`;
+        return `background-position: ${-71 * JOKERS[joker].pos.x}px ${-95 * JOKERS[joker].pos.y}px`;
       }
-      console.log(style);
-      return style;
     },
 
     reset() {
