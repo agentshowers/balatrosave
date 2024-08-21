@@ -28,3 +28,7 @@ header {
   display: flex;
   flex-wrap: wrap;
 }
+
+#githubLogo {
+  height: 50px;
+}
