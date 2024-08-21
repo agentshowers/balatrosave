@@ -1,3 +1,23 @@
+header {
+  padding: 10px !important;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0px !important;
+}
+
+#jimbo {
+  max-height: 100px;
+  align-self: center;
+}
+
+#app {
+  grid-column: 1/-1;
+  margin: 0 25px;
+}
+
 .joker {
   width: 71px;
   height: 95px;
