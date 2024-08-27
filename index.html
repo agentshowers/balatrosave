@@ -23,7 +23,8 @@
             <details v-for="stake in stakes.reverse()">
                 <summary>{{stake.name}} ({{stake.jokers.length}})</summary>
                 <div class="jokerContainer">
-                    <span v-for="joker in stake.jokers" class="joker" :style="jokerStyle(joker)"></span>
+                    <span v-for="joker in stake.jokers" class="joker" :data-joker-name="joker"
+                        :style="jokerStyle(joker)"></span>
                 </div>
             </details>
         </div>

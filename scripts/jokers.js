@@ -282,8 +282,8 @@ JOKERS = {
   "j_scholar": {
     "name": "Scholar",
     "pos": {
-      "x": 0,
-      "y": 4
+      "x": 3,
+      "y": 6
     }
   },
   "j_business": {
@@ -865,7 +865,7 @@ JOKERS = {
     "name": "Wee Joker",
     "pos": {
       "x": 0,
-      "y": 0
+      "y": 4
     }
   },
   "j_merry_andy": {
