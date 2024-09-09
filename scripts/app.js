@@ -1,4 +1,4 @@
-const STAKES = ["No wins", "White stake", "Red stake", "Green stake", "Black stake", "Blue stake", "Purple stake", "Orange stake", "Gold stake"]
+const STAKES = ["No wins", "White sticker", "Red sticker", "Green sticker", "Black sticker", "Blue sticker", "Purple sticker", "Orange sticker", "Gold sticker"]
 
 function convertFile(compressedFile) {
   let text = pako.inflate(compressedFile, { windowBits: -15, to: "string" });
